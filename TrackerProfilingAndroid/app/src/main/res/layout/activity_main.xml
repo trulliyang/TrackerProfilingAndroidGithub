@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="appmagics.trackerprofilingandroid.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sample_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/YUV"
+        android:text="load YUV"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/ArcSoft"
+        android:text="test ArcSoft"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom = "@+id/YUV"
+        android:layout_below="@+id/YUV" />
+
+    <Button
+        android:text="test FacePP"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ArcSoft"
+        android:id="@+id/FacePP"/>
+
+    <Button
+        android:text="test SenseTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FacePP"
+        android:id="@+id/SenseTime"/>
+
+    <Button
+        android:text="test appMagics"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SenseTime"
+        android:id="@+id/appMagics"/>
+
+    <Button
+        android:text="test ULSee"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appMagics"
+        android:id="@+id/ULSee"/>
+
+    <Button
+        android:text="test ULSee FaceRig"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ULSee"
+        android:id="@+id/ULSeeFaceRig" />
+</LinearLayout>
