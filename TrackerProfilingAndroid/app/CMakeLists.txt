@@ -25,6 +25,31 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
+#add arcsoft
+#add_library(ArcSoftSpotlight SHARED IMPORTED)
+#set_target_properties(ArcSoftSpotlight
+#                      PROPERTIES IMPORTED_LOCATION
+#                      ../../../../libs/armeabi-v7a/libArcSoftSpotlight.so)
+#include_directories(libs/include/arcsoft)
+
+#add facepp
+#add_library(MegviiFacepp SHARED IMPORTED)
+#set_target_properties(MegviiFacepp
+#                      PROPERTIES
+#                      IMPORTED_LOCATION
+#                      ../../../../libs/armeabi-v7a/libMegviiFacepp-0.4.7.so)
+#include_directories(libs/include/facepp)
+
+#add self
+#add_library(FacialLandmarkDetector SHARED IMPORTED )
+#set_target_properties(FacialLandmarkDetector
+#                      PROPERTIES
+#                      IMPORTED_LOCATION
+#                      ../../../../libs/armeabi-v7a/libFacialLandmarkDetector.so)
+#include_directories(libs/include/self)
+
+
+
 find_library( # Sets the name of the path variable.
               log-lib
 
@@ -38,7 +63,9 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-
+                       #ArcSoftSpotlight
+                       #MegviiFacepp
+                       #FacialLandmarkDetector
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )
