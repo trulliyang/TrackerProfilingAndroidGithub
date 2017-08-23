@@ -26,11 +26,11 @@ add_library( # Sets the name of the library.
 # completing its build.
 
 #add arcsoft
-#add_library(ArcSoftSpotlight SHARED IMPORTED)
-#set_target_properties(ArcSoftSpotlight
-#                      PROPERTIES IMPORTED_LOCATION
-#                      ../../../../libs/armeabi-v7a/libArcSoftSpotlight.so)
-#include_directories(libs/include/arcsoft)
+add_library(ArcSoftSpotlight SHARED IMPORTED)
+set_target_properties(ArcSoftSpotlight
+                      PROPERTIES IMPORTED_LOCATION
+                      ../../../../libs/armeabi-v7a/libArcSoftSpotlight.so)
+include_directories(libs/include/arcsoft)
 
 #add facepp
 #add_library(MegviiFacepp SHARED IMPORTED)
@@ -63,7 +63,7 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-                       #ArcSoftSpotlight
+                       ArcSoftSpotlight
                        #MegviiFacepp
                        #FacialLandmarkDetector
                        # Links the target library to the log library
