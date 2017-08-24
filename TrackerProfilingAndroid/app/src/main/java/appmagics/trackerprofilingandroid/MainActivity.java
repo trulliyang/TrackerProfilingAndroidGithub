@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private String fileName = "mnt/sdcard/ws23.yuv";
 
     private Tracker mTracker;
+    private File mDataDir;
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -41,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(stringFromJNI());
 
         mTracker = new Tracker();
+
+        mDataDir = getApplicationContext().getExternalFilesDir(null);
+        if (null != mDataDir) {
+            Log.e("shiyang", "shiyang dataDir = " + mDataDir);
+        }
 
         mBtnYUV = (Button) findViewById(R.id.YUV);
         mBtnTrackerArcSoft = (Button) findViewById(R.id.ArcSoft);
@@ -84,7 +91,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnTrackerArcSoft");
-                mTracker.init(0);
+                String path = mDataDir.getAbsolutePath() + File.separator + "as/track_data.dat";
+                mTracker.init(getApplicationContext(), 0, 1280, 720, 5, path, 270);
+                Log.e("shiyang", "shiyang  mTracker.init over");
             }
         });
 
