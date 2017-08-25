@@ -120,7 +120,11 @@ JNIEXPORT void JNICALL
 Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
         JNIEnv *env, jobject instance, jobject context, jint type,
         jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {
-    __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni init2 type = %d", type);
+    __android_log_print(
+            ANDROID_LOG_ERROR,
+            "shiyang jni1",
+            "shiyang jni init2 type = %d", type
+    );
 
     MG_FPP_APIHANDLE apihandle;
     MG_FPP_IMAGEHANDLE imgHandle;
@@ -137,7 +141,11 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
         int createCode = mg_facepp.CreateApiHandle((JNIEnv*) env, (jobject) context,
                                                    (const MG_BYTE *) data, t_file_len, &apihandle);
         if (apihandle && createCode == MG_RETCODE_OK) {
-            __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni Face++ 初始化成功");
+            __android_log_print(
+                    ANDROID_LOG_ERROR,
+                    "shiyang jni1",
+                    "shiyang jni Face++ 初始化成功"
+            );
 
             MG_FPP_APICONFIG config;
             config.detection_mode = MG_FPP_DETECTIONMODE_TRACKING;
@@ -145,24 +153,73 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
 
             int configResult = mg_facepp.SetDetectConfig(apihandle, &config);
             if (configResult == MG_RETCODE_OK) {
-                __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni Face++ 设置配置成功");
+                __android_log_print(
+                        ANDROID_LOG_ERROR,
+                        "shiyang jni1",
+                        "shiyang jni Face++ 设置配置成功"
+                );
             }
 
             int imgHandleCode = mg_facepp.CreateImageHandle(imgw, imgh, &imgHandle);
             if (imgHandleCode == MG_RETCODE_OK) {
-                __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni Face++ 生成img Handle 成功");
+                __android_log_print(
+                        ANDROID_LOG_ERROR,
+                        "shiyang jni1",
+                        "shiyang jni Face++ 生成img Handle 成功"
+                );
             } else {
-                __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni Face++ 生成img Handle失败,createCode = %d", imgHandleCode);
+                __android_log_print(
+                        ANDROID_LOG_ERROR,
+                        "shiyang jni1",
+                        "shiyang jni Face++ 生成img Handle 失败, createCode = %d", imgHandleCode
+                );
             }
         } else {
-            __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni Face++ 初始化失败,createCode = %d", createCode);
+            __android_log_print(
+                    ANDROID_LOG_ERROR,
+                    "shiyang jni1",
+                    "shiyang jni Face++ 初始化失败,createCode = %d", createCode
+            );
         }
 
         delete[] data;
         fclose(fp);
     } else {
-        __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang jni open face++ data file failed");
+        __android_log_print(
+                ANDROID_LOG_ERROR,
+                "shiyang jni1",
+                "shiyang jni open face++ data file failed"
+        );
     }
+
+    if (apihandle) {
+        if (!imgHandle) {
+            mg_facepp.CreateImageHandle(imgw, imgh, &imgHandle);
+        }
+
+        FILE* pYUV = fopen("/storage/emulated/0/ws23.yuv", "r");
+        int len = 1280*720*3/2*50;
+        unsigned char *buf = new unsigned char[len];
+        if (pYUV) {
+            __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv success\n");
+            fread(buf, 1, len, pYUV);
+        } else {
+            __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv failed\n");
+        }
+
+        for (int i=0; i<50; i++) {
+            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf + i*1280*720*3/2, MG_IMAGEMODE_NV21);
+
+            int m_face_count;
+            mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
+            __android_log_print(
+                    ANDROID_LOG_ERROR,
+                    "shiyang jni1",
+                    "shiyang face count = %d\n", m_face_count
+            );
+        }
+    }
+
 
 }
 
