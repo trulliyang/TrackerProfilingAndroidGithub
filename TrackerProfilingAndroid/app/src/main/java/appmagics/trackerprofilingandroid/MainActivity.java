@@ -62,28 +62,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnYUV");
 
-                if (!mYuvDataHasGot) {
-                    Log.e("shiyang", "shiyang open yuv file");
-                    try {
-                        FileInputStream fin = new FileInputStream(fileName);
-                        int length = fin.available();
-                        mYuvData = new byte[length];
-                        fin.read(mYuvData);
-                        //                yuvData = new byte[1382400];
-                        //                fin.read(yuvData, 0, 1382400);
-                        fin.close();
-                        mYuvDataHasGot = true;
-                    } catch (Exception e) {
-                        Log.e("shiyang", "shiyang file " + fileName + " does not exist");
-                        e.printStackTrace();
-                    } finally {
-                        if (mYuvDataHasGot) {
-                            Log.e("shiyang", "shiyang file " + fileName + " exists");
-                        }
-                    }
-                } else {
-                    Log.e("shiyang", "shiyang no need to open yuv file again");
-                }
+//                if (!mYuvDataHasGot) {
+//                    Log.e("shiyang", "shiyang open yuv file");
+//                    try {
+//                        FileInputStream fin = new FileInputStream(fileName);
+//                        int length = fin.available();
+//                        mYuvData = new byte[length];
+//                        fin.read(mYuvData);
+//                        //                yuvData = new byte[1382400];
+//                        //                fin.read(yuvData, 0, 1382400);
+//                        fin.close();
+//                        mYuvDataHasGot = true;
+//                    } catch (Exception e) {
+//                        Log.e("shiyang", "shiyang file " + fileName + " does not exist");
+//                        e.printStackTrace();
+//                    } finally {
+//                        if (mYuvDataHasGot) {
+//                            Log.e("shiyang", "shiyang file " + fileName + " exists");
+//                        }
+//                    }
+//                } else {
+//                    Log.e("shiyang", "shiyang no need to open yuv file again");
+//                }
             }
         });
 
@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnTrackerFacePP");
+                mTracker.init(getApplicationContext(), 1, 1280, 720, 5, null, 270);
+                Log.e("shiyang", "shiyang  mTracker.init over");
             }
         });
 
