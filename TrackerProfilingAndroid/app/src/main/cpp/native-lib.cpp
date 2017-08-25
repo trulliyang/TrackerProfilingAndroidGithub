@@ -198,28 +198,37 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
         }
 
         FILE* pYUV = fopen("/storage/emulated/0/ws23.yuv", "r");
-        int len = 1280*720*3/2*50;
+        int lenPerFrame = 1280*720*3/2;
+        int Frame = 50;
+        int len = lenPerFrame*Frame;
         unsigned char *buf = new unsigned char[len];
         if (pYUV) {
             __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv success\n");
             fread(buf, 1, len, pYUV);
+            fclose(pYUV);
         } else {
             __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv failed\n");
         }
 
         for (int i=0; i<50; i++) {
-            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf + i*1280*720*3/2, MG_IMAGEMODE_NV21);
+            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf + i*lenPerFrame, MG_IMAGEMODE_NV21);
 
             int m_face_count;
             mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
             __android_log_print(
                     ANDROID_LOG_ERROR,
                     "shiyang jni1",
-                    "shiyang face count = %d\n", m_face_count
+                    "shiyang frame %d face count = %d\n", i, m_face_count
             );
         }
+        delete[] buf;
     }
-
+    if (imgHandle) {
+        mg_facepp.ReleaseImageHandle(imgHandle);
+    }
+    if (apihandle) {
+        mg_facepp.ReleaseApiHandle(apihandle);
+    }
 
 }
 
