@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnTrackerSenseTime");
+
             }
         });
 
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnTrackerAppMagics");
+                mTracker.init(getApplicationContext(), 3, 1280, 720, 5, null, 270);
+                Log.e("shiyang", "shiyang  mTracker.init over");
             }
         });
 

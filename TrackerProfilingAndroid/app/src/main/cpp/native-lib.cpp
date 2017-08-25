@@ -4,6 +4,8 @@
 #include <amcomdef.h>
 #include <arcsoft_spotlight.h>
 #include <MG_Facepp.h>
+#include <FaceTracker.h>
+
 std::string jstringTostring(JNIEnv *env, jstring jstr) {
     const char *c_str = NULL;
     c_str = env->GetStringUTFChars(jstr, NULL);
@@ -75,7 +77,7 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI0(
                                   (MPVoid *) env, (void **) &context);
     if (result != MOK) {
         __android_log_print(ANDROID_LOG_ERROR, "shiyang jni0",
-                            "shiyang arcsoft init fail, result = %ld\n", result);
+                            "shiyang arcsoft init fail, result = 0X%lx\n", result);
 //        return false;
     } else {
         __android_log_print(ANDROID_LOG_ERROR, "shiyang jni0", "shiyang arcsoft init suceess\n");
@@ -236,6 +238,7 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
                     "shiyang jni1",
                     "shiyang frame %d face count = %d\n", i, m_face_count
             );
+//            if (i == 49) i = 0;
         }
         delete[] buf;
     }
@@ -258,7 +261,58 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
         JNIEnv *env, jobject instance, jobject context, jint type,
-        jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {}
+        jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {
+    __android_log_print(
+            ANDROID_LOG_ERROR,
+            "shiyang jni2",
+            "shiyang jni init2 type = %d", type
+    );
+
+    std::string path = std::string("/storage/emulated/0/model");
+    FaceTracker *m_FaceTracker = nullptr;
+    m_FaceTracker = new FaceTracker("/storage/emulated/0/model", "/main_clnf_multi_pie.txt"); 
+    if (m_FaceTracker) {
+        __android_log_print(
+                ANDROID_LOG_ERROR,
+                "shiyang jni2",
+                "shiyang jni init2 new self tracker ok"
+        );
+    } else {
+        __android_log_print(
+                ANDROID_LOG_ERROR,
+                "shiyang jni2",
+                "shiyang jni init2 new self tracker shiit"
+        );
+    }
+
+    FILE* pYUV = fopen("/storage/emulated/0/ws23.yuv", "r");
+    int lenPerFrame = 1280*720*3/2;
+    int Frame = 50;
+    int len = lenPerFrame*Frame;
+    unsigned char *buf = new unsigned char[len];
+    if (pYUV) {
+        __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv success\n");
+        fread(buf, 1, len, pYUV);
+        fclose(pYUV);
+    } else {
+        __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv failed\n");
+    }
+    int colorType = 1;
+    int face_rotate = 3;
+
+    for (int i=0; i<Frame; i++) {
+        std::vector<FacialInfo> result_list = m_FaceTracker->FacialLandmarkDetectInVideo(
+                (char *)(buf+i*lenPerFrame), imgw, imgh,
+                colorType * imgw * sizeof(char), colorType, faceOritation(face_rotate));
+        int m_face_count = result_list.size();
+        __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1",
+                            "shiyang detectSELF face count = %d", m_face_count);
+//        if (i == 49) i = 0;
+    }
+
+}
+
+
 
 extern "C"
 JNIEXPORT void JNICALL
