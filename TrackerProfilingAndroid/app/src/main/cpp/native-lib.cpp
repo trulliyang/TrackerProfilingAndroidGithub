@@ -4,6 +4,12 @@
 #include <amcomdef.h>
 #include <arcsoft_spotlight.h>
 #include <MG_Facepp.h>
+#include "time.h"
+extern int clock_gettime(int, struct timespec *);
+struct timespec now;
+#define  LOGE(x...)  __android_log_print(ANDROID_LOG_ERROR,"shiyang jni",x)
+
+
 std::string jstringTostring(JNIEnv *env, jstring jstr) {
     const char *c_str = NULL;
     c_str = env->GetStringUTFChars(jstr, NULL);
@@ -207,17 +213,42 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
             __android_log_print(ANDROID_LOG_ERROR, "shiyang jni1", "shiyang open yuv failed\n");
         }
 
-        for (int i=0; i<50; i++) {
+        for (int i=0; i<11; i++) {
             mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf + i*1280*720*3/2, MG_IMAGEMODE_NV21);
 
             int m_face_count;
             mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
-            __android_log_print(
-                    ANDROID_LOG_ERROR,
-                    "shiyang jni1",
-                    "shiyang face count = %d\n", m_face_count
-            );
         }
+
+        float time_cost[50];
+        float sum = 0.0;
+
+        for (int i=0; i<50; i++) {
+
+            clock_gettime(CLOCK_MONOTONIC, &now);
+            long long int time_begin = now.tv_sec * 1000000000LL + now.tv_nsec;
+
+
+            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf + i*1280*720*3/2, MG_IMAGEMODE_NV21);
+
+            int m_face_count;
+            mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
+            clock_gettime(CLOCK_MONOTONIC, &now);
+            long long int time_end = now.tv_sec * 1000000000LL + now.tv_nsec;
+            time_cost[i] = (time_end - time_begin)/1000000.0f;
+            sum += time_cost[i];
+
+//            __android_log_print(
+//                    ANDROID_LOG_ERROR,
+//                    "shiyang jni1",
+//                    "shiyang face count = %d\n", m_face_count
+//            );
+        }
+        LOGE("shiyang FPP time_cost_sum=%f", sum);
+        for (int i=0; i<50; i++) {
+            LOGE("shiyang FPP time_cost[%d]=%f", i, time_cost[i]);
+        }
+
     }
 
 
