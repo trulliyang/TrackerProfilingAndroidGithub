@@ -325,12 +325,37 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
     int colorType = 1;
     int face_rotate = 3;
 
+
+
+    for (int i=0; i<10; i++) {
+        std::vector<FacialInfo> result_list =
+                m_FaceTracker->FacialLandmarkDetectInVideo((char *)(buf+i*lenPerFrame), imgw, imgh,
+                                                           colorType * imgw * sizeof(char), colorType, faceOritation(face_rotate));
+//        int m_face_count = result_list.size();
+//        LOGE("shiyang detectSELF face count = %d", m_face_count);
+    }
+
+    float time_cost[Frame];
+    float sum = 0.0;
+
     for (int i=0; i<Frame; i++) {
+        // begin
+        clock_gettime(CLOCK_MONOTONIC, &now);
+        long long int time_begin = now.tv_sec * 1000000000LL + now.tv_nsec;
         std::vector<FacialInfo> result_list =
                 m_FaceTracker->FacialLandmarkDetectInVideo((char *)(buf+i*lenPerFrame), imgw, imgh,
                 colorType * imgw * sizeof(char), colorType, faceOritation(face_rotate));
-        int m_face_count = result_list.size();
-        LOGE("shiyang detectSELF face count = %d", m_face_count);
+        clock_gettime(CLOCK_MONOTONIC, &now);
+        long long int time_end = now.tv_sec * 1000000000LL + now.tv_nsec;
+        time_cost[i] = (time_end - time_begin)/1000000.0f;
+        sum += time_cost[i];
+//        int m_face_count = result_list.size();
+//        LOGE("shiyang detectSELF face count = %d", m_face_count);
+    }
+
+    LOGE("shiyang self time_cost_sum=%f", sum);
+    for (int i=0; i<Frame; i++) {
+        LOGE("shiyang self time_cost[%d]=%f", i, time_cost[i]);
     }
 
 }
