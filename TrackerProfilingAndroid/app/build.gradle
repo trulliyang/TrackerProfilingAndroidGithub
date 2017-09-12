@@ -1,11 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'aaaaaa'
+            keyPassword 'aaaaaa'
+            storeFile file('/Users/admin/Documents/wooork/TrackerProfilingAndroidGithub/TrackerProfilingAndroid/app/aaaaaa.jks')
+            storePassword 'aaaaaa'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.appmagics.facemagic.avatar"
-//        applicationId "com.ml.national"
+//        applicationId "com.appmagics.facemagic.avatar"
+        applicationId "com.ml.national"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
@@ -17,28 +25,30 @@ android {
                 abiFilters "armeabi-v7a"
             }
         }
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
-
     sourceSets.main {
         jniLibs.srcDirs = ['libs']
         jni.srcDirs = []
     }
-
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

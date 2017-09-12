@@ -1,5 +1,6 @@
 package appmagics.trackerprofilingandroid;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private Button mBtnYUV;
     private Button mBtnTrackerArcSoft;
     private Button mBtnTrackerFacePP;
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("shiyang", "shiyang click btnTrackerSenseTime");
+                mTracker.init(getApplicationContext(), 2, 1280, 720, 5, null, 270);
 
             }
         });

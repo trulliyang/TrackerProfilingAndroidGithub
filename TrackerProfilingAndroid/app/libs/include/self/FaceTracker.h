@@ -13,13 +13,6 @@ enum faceOritation{
     faceOritationUpsideDown = 2,
     faceOritationRight = 3
 };
-
-enum {
-    SELF_IMAGEMODE_GRAY = 1,//YUV 把Y通道 当做灰度传入 传1就行了
-    SELF_IMAGEMODE_RGB = 3,
-    SELF_IMAGEMODE_RGBA = 4
-};
-
 struct  PtInfo
 {
     PtInfo(float _x, float _y)
@@ -95,9 +88,9 @@ class FaceTracker
 public:
     FaceTracker(std::string rootPath,std::string modelPath);
     ~FaceTracker();
-    FacialInfo FacialLandMarkDetectInVideoSingleFace(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation, bool haveRect = false, faceRect _faceRect = faceRect(0,0,0,0));
-    std::vector<FacialInfo> FacialLandmarkDetectInVideo(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation, bool haveRect = false, std::vector<faceRect> faceRects = std::vector<faceRect>());
-    std::vector<FacialInfo> FacialLandmarkDetectImage(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation);
+    FacialInfo FacialLandMarkDetectInVideoSingleFace(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation = faceOritationUp, bool haveRect = false, faceRect _faceRect = faceRect(0, 0, 0, 0));
+    std::vector<FacialInfo> FacialLandmarkDetectInVideo(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation = faceOritationUp, bool haveRect = false, std::vector<faceRect> faceRects = std::vector<faceRect>());
+    std::vector<FacialInfo> FacialLandmarkDetectImage(char* FrameBuffer, int width, int height, int bytesPerRow, int format, faceOritation rotation = faceOritationUp);
 
 
     void setDetectRate(int DetectRate);

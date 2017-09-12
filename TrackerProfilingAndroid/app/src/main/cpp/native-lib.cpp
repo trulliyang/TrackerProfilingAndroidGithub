@@ -248,11 +248,11 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI1(
         float sum = 0.0;
         // first 10 frame never detects face;
 
-//        for (int i=0; i<10; i++) {
-//            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf, MG_IMAGEMODE_NV21);
-//            int m_face_count;
-//            mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
-//        }
+        for (int i=0; i<30; i++) {
+            mg_facepp.SetImageData(imgHandle, (const MG_BYTE *) buf, MG_IMAGEMODE_NV21);
+            int m_face_count;
+            mg_facepp.Detect(apihandle, imgHandle, &m_face_count);
+        }
 
         for (int i=0; i<Frame; i++) {
             // begin
@@ -292,7 +292,15 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_appmagics_trackerprofilingandroid_Tracker_initJNI2(
         JNIEnv *env, jobject instance, jobject context, jint type,
-        jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {}
+        jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {
+    LOGE("shiyang jni init2 type = %d", type);
+    // lisence
+
+    // init
+
+    // detect
+
+}
 
 extern "C"
 JNIEXPORT void JNICALL
@@ -322,10 +330,9 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
     } else {
         LOGE("shiyang open yuv failed\n");
     }
+
     int colorType = 1;
     int face_rotate = 3;
-
-
 
     for (int i=0; i<10; i++) {
         std::vector<FacialInfo> result_list =
@@ -337,8 +344,10 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
 
     float time_cost[Frame];
     float sum = 0.0;
-
+//    int num_ignore = 0;
+//    bool needIgnore = false;
     for (int i=0; i<Frame; i++) {
+
         // begin
         clock_gettime(CLOCK_MONOTONIC, &now);
         long long int time_begin = now.tv_sec * 1000000000LL + now.tv_nsec;
@@ -348,12 +357,17 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
         clock_gettime(CLOCK_MONOTONIC, &now);
         long long int time_end = now.tv_sec * 1000000000LL + now.tv_nsec;
         time_cost[i] = (time_end - time_begin)/1000000.0f;
+//        if (i%10 == 9) {
+//            time_cost[i] = 0.0f;
+//        }
         sum += time_cost[i];
+
 //        int m_face_count = result_list.size();
 //        LOGE("shiyang detectSELF face count = %d", m_face_count);
     }
 
-    LOGE("shiyang self time_cost_sum=%f", sum);
+    LOGE("shiyang self time_cost_sum=%f avg=%f", sum, sum/Frame);
+
     for (int i=0; i<Frame; i++) {
         LOGE("shiyang self time_cost[%d]=%f", i, time_cost[i]);
     }
