@@ -24,41 +24,41 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 #include "asvloffscreen.h"
 #include "merror.h"
 
 #define ASL_MERR_BOUNDID_ERROR                  0X8000
 #define ASL_MERR_PROCESSMODEL_UNSUPPORT         0X8001
-    
+
 #define ASL_MAX_FACE_NUM   4
-    
+
 #define ASL_PROCESS_MODEL_NONE          0x00000000
 #define ASL_PROCESS_MODEL_FACEOUTLINE   0x00000001
 #define ASL_PROCESS_MODEL_FACEBEAUTY    0x00000002
-    
+
 MHandle         ASL_CreateEngine();
 MVoid           ASL_DestroyEngine(MHandle hHandle);
-    
+
 MRESULT         ASL_Initialize(MHandle hHandle,const MChar* szTrackDataPath,MUInt32 nProcessFaceCount,MVoid* JNIEnv, MVoid** jcontext);
 MRESULT         ASL_Uninitialize(MHandle hHandle);
-    
+
 MRESULT         ASL_SetProcessModel(MHandle hHandle,MUInt32 nProcessModel);
-    
+
 MVoid           ASL_SetFaceSkinSoftenLevel(MHandle hHandle,MLong lLevel); // 0-100
 MVoid           ASL_SetFaceBrightLevel(MHandle hHandle,MLong lLevel); // 0-100
-    
+
 MUInt32         ASL_GetFaceOutlinePointCount();
 MRESULT         ASL_Process(MHandle hHandle,
-                                LPASVLOFFSCREEN pOffScreenIn,
-                                LPASVLOFFSCREEN pOffScreenOut,
-                                MInt32* pFaceCountInOut,
-                                MPOINT* pFaceOutlinePointOut,
-                                MRECT*  pFaceRectOut,
-                                MFloat* pFaceOrientOut
-                                );
+                            LPASVLOFFSCREEN pOffScreenIn,
+                            LPASVLOFFSCREEN pOffScreenOut,
+                            MInt32* pFaceCountInOut,
+                            MPOINT* pFaceOutlinePointOut,
+                            MRECT*  pFaceRectOut,
+                            MFloat* pFaceOrientOut
+);
 const ASVL_VERSION* ASL_GetVersion();
-    
+
 #ifdef __cplusplus
 }
 

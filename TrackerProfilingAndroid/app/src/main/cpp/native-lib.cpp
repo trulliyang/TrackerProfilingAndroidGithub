@@ -97,6 +97,7 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI0(
                                   (MPVoid *) env, (void **) &context);
     if (result != MOK) {
         LOGE("shiyang arcsoft init fail, result = 0X%lx\n", result);
+//        return;
     } else {
 //        LOGE("shiyang arcsoft init suceess\n");
     }
@@ -147,11 +148,11 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI0(
         );
         clock_gettime(CLOCK_MONOTONIC, &now);
         long long int time_end = now.tv_sec * 1000000000LL + now.tv_nsec;
-        if (nFaceCountInOut<=0) {
-            LOGE("shiyang ready to arcsoft no face\n");
-            i--;
-            continue;
-        }
+//        if (nFaceCountInOut<=0) {
+//            LOGE("shiyang ready to arcsoft no face\n");
+//            i--;
+//            continue;
+//        }
 
 
         time_cost[i] = (time_end - time_begin)/1000000.0f;
@@ -165,7 +166,7 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI0(
 //        cpu->GetUsedCpu();
 //        cpu->getProcCPUStat();
         if (hr != MOK) {
-            LOGE("shiyang arcsoft process fail\n");
+            LOGE("shiyang arcsoft process fail err code = 0X%x\n", hr);
         } else {
 //            LOGE("shiyang arcsoft process sucess\n");
 //            LOGE("shiyang arcsoft frame %d face count = %d\n", i, nFaceCountInOut);

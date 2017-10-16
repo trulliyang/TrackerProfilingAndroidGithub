@@ -55,8 +55,8 @@ typedef long					MLong;
 typedef float					MFloat;
 typedef double					MDouble;
 typedef unsigned char			MByte;
-typedef unsigned short			MWord;	
-typedef unsigned int 			MDWord;	
+typedef unsigned short			MWord;
+typedef unsigned int 			MDWord;
 typedef void*					MHandle;
 typedef char					MChar;
 typedef long					MBool;
@@ -66,7 +66,7 @@ typedef char*					MPChar;
 typedef short					MShort;
 typedef const char*				MPCChar;
 typedef	MLong					MRESULT;
-typedef MDWord					MCOLORREF; 
+typedef MDWord					MCOLORREF;
 typedef	signed		char		MInt8;
 typedef	unsigned	char		MUInt8;
 typedef	signed		short		MInt16;
@@ -93,9 +93,9 @@ typedef struct __tag_rect
 } MRECT, *PMRECT;
 
 typedef struct __tag_point
-{ 
-	MInt32 x; 
-	MInt32 y; 
+{
+	MInt32 x;
+	MInt32 y;
 } MPOINT, *PMPOINT;
 
 
@@ -109,7 +109,7 @@ typedef struct __tag_point
 
 #ifdef M_WIDE_CHAR
 #define MTChar MWChar
-#else 
+#else
 #define MTChar MChar
 #endif
 

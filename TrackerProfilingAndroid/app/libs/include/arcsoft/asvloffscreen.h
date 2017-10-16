@@ -36,64 +36,64 @@ extern "C" {
 #define		ASVL_PAF_RGB16_B5G5R5		0x102
 /* X  X  X  X  R  R  R  R  G  G  G  G  B  B  B  B */
 #define		ASVL_PAF_RGB16_B4G4R4		0x103
-/* T  R  R  R  R  R  G  G  G  G  G  B  B  B  B  B */ 
+/* T  R  R  R  R  R  G  G  G  G  G  B  B  B  B  B */
 #define		ASVL_PAF_RGB16_B5G5R5T		0x104
-/* B  B  B  B  B  G  G  G  G  G  G  R  R  R  R  R */ 
+/* B  B  B  B  B  G  G  G  G  G  G  R  R  R  R  R */
 #define		ASVL_PAF_RGB16_R5G6B5		0x105
-/* X  B  B  B  B  B  G  G  G  G  G  R  R  R  R  R */  
+/* X  B  B  B  B  B  G  G  G  G  G  R  R  R  R  R */
 #define		ASVL_PAF_RGB16_R5G5B5		0x106
-/* X  X  X  X  B  B  B  B  G  G  G  G  R  R  R  R */ 
+/* X  X  X  X  B  B  B  B  G  G  G  G  R  R  R  R */
 #define		ASVL_PAF_RGB16_R4G4B4		0x107
 
 
 /* R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B */
 #define		ASVL_PAF_RGB24_B8G8R8		0x201
-/* X	X  X  X	 X	X  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B */ 
+/* X	X  X  X	 X	X  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B */
 #define		ASVL_PAF_RGB24_B6G6R6		0x202
-/* X	X  X  X	 X	T  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B */ 
+/* X	X  X  X	 X	T  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B */
 #define		ASVL_PAF_RGB24_B6G6R6T		0x203
 /* B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R	R  R  R	 R	R  R  R */
 #define		ASVL_PAF_RGB24_R8G8B8		0x204
 /* X	X  X  X	 X	X  B  B  B  B  B  B  G  G  G  G  G  G  R  R  R  R  R  R */
 #define		ASVL_PAF_RGB24_R6G6B6		0x205
 
-/* X	X  X  X	 X	X  X  X	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B */ 
+/* X	X  X  X	 X	X  X  X	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B */
 #define		ASVL_PAF_RGB32_B8G8R8		0x301
-/* A	A  A  A	 A	A  A  A	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B */ 
+/* A	A  A  A	 A	A  A  A	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B */
 #define		ASVL_PAF_RGB32_B8G8R8A8		0x302
-/* X	X  X  X	 X	X  X  X	 B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R	R  R  R	 R	R  R  R */ 
+/* X	X  X  X	 X	X  X  X	 B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R	R  R  R	 R	R  R  R */
 #define		ASVL_PAF_RGB32_R8G8B8		0x303
 /* B    B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R  R  R  R  R  R  R  R  A	A  A  A  A	A  A  A */
 #define		ASVL_PAF_RGB32_A8R8G8B8		0x304
 /* A    A  A  A  A  A  A  A  B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R  R  R  R  R	R  R  R */
 #define		ASVL_PAF_RGB32_R8G8B8A8		0x305
 
-/*Y0, U0, V0*/																				
+/*Y0, U0, V0*/
 #define		ASVL_PAF_YUV				0x401
-/*Y0, V0, U0*/																				
+/*Y0, V0, U0*/
 #define		ASVL_PAF_YVU				0x402
-/*U0, V0, Y0*/																				
+/*U0, V0, Y0*/
 #define		ASVL_PAF_UVY				0x403
-/*V0, U0, Y0*/																				
+/*V0, U0, Y0*/
 #define		ASVL_PAF_VUY				0x404
 
-/*Y0, U0, Y1, V0*/																			
+/*Y0, U0, Y1, V0*/
 #define		ASVL_PAF_YUYV				0x501
-/*Y0, V0, Y1, U0*/																			
+/*Y0, V0, Y1, U0*/
 #define		ASVL_PAF_YVYU				0x502
-/*U0, Y0, V0, Y1*/																			
+/*U0, Y0, V0, Y1*/
 #define		ASVL_PAF_UYVY				0x503
-/*V0, Y0, U0, Y1*/																			
+/*V0, Y0, U0, Y1*/
 #define		ASVL_PAF_VYUY				0x504
-/*Y1, U0, Y0, V0*/																			
+/*Y1, U0, Y0, V0*/
 #define		ASVL_PAF_YUYV2				0x505
-/*Y1, V0, Y0, U0*/																		
+/*Y1, V0, Y0, U0*/
 #define		ASVL_PAF_YVYU2				0x506
-/*U0, Y1, V0, Y0*/																			
+/*U0, Y1, V0, Y0*/
 #define		ASVL_PAF_UYVY2				0x507
-/*V0, Y1, U0, Y0*/																			
+/*V0, Y1, U0, Y0*/
 #define		ASVL_PAF_VYUY2				0x508
-/*Y0, Y1, U0, V0*/																			
+/*Y0, Y1, U0, V0*/
 #define		ASVL_PAF_YYUV				  0x509
 
 /*8 bit Y plane followed by 8 bit 2x2 subsampled U and V planes*/
@@ -106,7 +106,7 @@ extern "C" {
 #define		ASVL_PAF_I444				0x604
 /*8 bit Y plane followed by 8 bit 2x2 subsampled V and U planes*/
 #define		ASVL_PAF_YV12				0x605
-/*8 bit Y plane followed by 8 bit 1x2 subsampled V and U planes*/	
+/*8 bit Y plane followed by 8 bit 1x2 subsampled V and U planes*/
 #define		ASVL_PAF_YV16V				0x606
 /*8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes*/
 #define		ASVL_PAF_YV16H				0x607
@@ -126,7 +126,7 @@ extern "C" {
 #define		ASVL_PAF_LPI422H2			0x804
 
 
-/*Negative UYVY, U0, Y0, V0, Y1*/																			
+/*Negative UYVY, U0, Y0, V0, Y1*/
 #define		ASVL_PAF_NEG_UYVY			0x901
 /*Negative I420, 8 bit Y plane followed by 8 bit 2x2 subsampled U and V planes*/
 #define		ASVL_PAF_NEG_I420			0x902
@@ -146,26 +146,26 @@ extern "C" {
 /*10 bits RGGB CFA raw data, each data has 2 bytes*/
 #define   ASVL_PAF_RAW_RGGB_10B   0xd01
 
-/*Define the image format space*/		
+/*Define the image format space*/
 typedef struct __tag_ASVL_OFFSCREEN
 {
-	MUInt32	u32PixelArrayFormat;
-	MInt32	i32Width;
-	MInt32	i32Height;
-	MUInt8*	ppu8Plane[4];
-	MInt32	pi32Pitch[4];
+    MUInt32	u32PixelArrayFormat;
+    MInt32	i32Width;
+    MInt32	i32Height;
+    MUInt8*	ppu8Plane[4];
+    MInt32	pi32Pitch[4];
 }ASVLOFFSCREEN, *LPASVLOFFSCREEN;
 
-/*Define the SDK Version infos. This is the template!!!*/		
+/*Define the SDK Version infos. This is the template!!!*/
 typedef struct __tag_ASVL_VERSION
 {
-	    MLong lCodebase;             	// Codebase version number 
-	    MLong lMajor;                		// major version number 
-	    MLong lMinor;                		// minor version number
-	    MLong lBuild;                		// Build version number, increasable only
-	    const MChar *Version;        	// version in string form
-	    const MChar *BuildDate;      	// latest build Date
-	    const MChar *CopyRight;      	// copyright 
+    MLong lCodebase;             	// Codebase version number
+    MLong lMajor;                		// major version number
+    MLong lMinor;                		// minor version number
+    MLong lBuild;                		// Build version number, increasable only
+    const MChar *Version;        	// version in string form
+    const MChar *BuildDate;      	// latest build Date
+    const MChar *CopyRight;      	// copyright
 }ASVL_VERSION;
 const ASVL_VERSION *ASVL_GetVersion();
 
