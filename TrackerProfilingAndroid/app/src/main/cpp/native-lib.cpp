@@ -147,6 +147,13 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI0(
         );
         clock_gettime(CLOCK_MONOTONIC, &now);
         long long int time_end = now.tv_sec * 1000000000LL + now.tv_nsec;
+        if (nFaceCountInOut<=0) {
+            LOGE("shiyang ready to arcsoft no face\n");
+            i--;
+            continue;
+        }
+
+
         time_cost[i] = (time_end - time_begin)/1000000.0f;
         sum += time_cost[i];
         // end
@@ -309,9 +316,10 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
         jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {
     LOGE("shiyang jni init2 type = %d", type);
 
-    std::string path = std::string("/storage/emulated/0/model");
+//    std::string path = std::string("/storage/emulated/0/model");
     FaceTracker *m_FaceTracker = nullptr;
     m_FaceTracker = new FaceTracker("/storage/emulated/0/model", "/main_clnf_multi_pie.txt"); 
+//    m_FaceTracker = new FaceTracker("/storage/emulated/0/model3", "/main_clnf_multi_pie_fast.txt");
     if (m_FaceTracker) {
         LOGE("shiyang jni init2 new self tracker ok");
     } else {
@@ -337,7 +345,8 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
     for (int i=0; i<10; i++) {
         std::vector<FacialInfo> result_list =
                 m_FaceTracker->FacialLandmarkDetectInVideo((char *)(buf+i*lenPerFrame), imgw, imgh,
-                                                           colorType * imgw * sizeof(char), colorType, faceOritation(face_rotate));
+                                                           colorType * imgw * sizeof(char), colorType,
+                                                           faceOritation(face_rotate));
 //        int m_face_count = result_list.size();
 //        LOGE("shiyang detectSELF face count = %d", m_face_count);
     }
@@ -362,8 +371,8 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI3(
 //        }
         sum += time_cost[i];
 
-//        int m_face_count = result_list.size();
-//        LOGE("shiyang detectSELF face count = %d", m_face_count);
+        int m_face_count = result_list.size();
+        LOGE("shiyang detectSELF face count = %d", m_face_count);
     }
 
     LOGE("shiyang self time_cost_sum=%f avg=%f", sum, sum/Frame);
@@ -399,6 +408,11 @@ Java_appmagics_trackerprofilingandroid_Tracker_initJNI6(
         jint imgw, jint imgh, jint formate, jstring respath_, jint img_angle) {
 
 }
+
+
+
+
+
 
 void getProcCPUStat(struct systemCPUdata *proc, int pid)
 
@@ -446,3 +460,57 @@ void getProcCPUStat(struct systemCPUdata *proc, int pid)
 
 
 }
+
+#if 0 //self model3 fast.txt
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost_sum=1729.778809 avg=34.595577
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[0]=33.365574
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[1]=33.213333
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[2]=33.805103
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[3]=33.444427
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[4]=34.197033
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[5]=33.599895
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[6]=33.448437
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[7]=32.480518
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[8]=31.952345
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[9]=50.707657
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[10]=32.075779
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[11]=32.274063
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[12]=31.644428
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[13]=33.313072
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[14]=32.655312
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[15]=32.491302
+09-18 21:19:56.672 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[16]=32.773281
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[17]=33.834740
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[18]=31.415991
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[19]=56.875362
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[20]=32.938751
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[21]=31.939531
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[22]=32.175468
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[23]=31.356876
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[24]=32.424427
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[25]=31.302032
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[26]=31.286457
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[27]=30.239479
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[28]=32.209740
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[29]=57.111927
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[30]=29.328176
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[31]=31.109896
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[32]=32.863384
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[33]=35.769115
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[34]=33.425781
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[35]=30.778437
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[36]=30.937187
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[37]=32.490417
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[38]=34.002708
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[39]=52.394688
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[40]=32.127865
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[41]=30.940260
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[42]=31.369013
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[43]=33.227760
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[44]=32.947033
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[45]=33.145000
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[46]=32.105053
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[47]=32.369324
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[48]=32.876144
+09-18 21:19:56.673 8875-8875/com.ml.national E/shiyang jni: shiyang self time_cost[49]=53.019375
+#endif
